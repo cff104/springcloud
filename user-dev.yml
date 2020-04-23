@@ -1,0 +1,36 @@
+server:
+  port: 9001
+spring: #服务名称，暂时没有用，讲到springCould服务调用时候才会用到
+  application:
+    name: microservice-user
+  datasource:
+      url: jdbc:oracle:thin:@127.0.0.1:1521/ORCL
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      username: wfw
+      password: wfw
+  jpa:
+      show-sql: true # 是否要打印语句
+      generate-ddl: true # 是否自协建表
+      database: oracle # jpa 连接数据库类型  mysql
+      # 单机版
+eureka:
+  client:
+    register-with-eureka: true # 作为客户端需要注册到eureka
+    fetch-registry: true # 作为客户端需要从eureka获取注册信息
+    service-url: #客户端注册地址
+      defaultZone: http://127.0.0.1:8888/eureka
+  instance:
+    prefer-ip-address: true #优先使用微服务ip地址到eureka,在生产环节建该改为true
+    # 续约间隔时间 不是越短越好 5秒，默认30秒
+    lease-renewal-interval-in-seconds: 5
+    # 一般失效大于续约 默认90s
+    lease-expiration-duration-in-seconds: 10
+       # 集群版
+#eureka:
+#  client:
+#    register-with-eureka: true # 作为客户端需要注册到eureka
+#    fetch-registry: true # 作为客户端需要从eureka获取注册信息
+#    service-url: #客户端注册地址
+#      defaultZone: http://127.0.0.1:8888/eureka,http://127.0.0.1:9999/eureka
+#    instance:
+#      prefer-ip-address: true #优先使用微服务ip地址到eureka,在生产环节建该改为true

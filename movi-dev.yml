@@ -1,0 +1,33 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: microservice-movie
+    # 旱机版
+eureka:
+  client:
+    register-with-eureka: true # 是否需要注册到eureka
+    fetch-registry: true #客户端是否需要从eureka获取信息 如果为false 是不允许调用其它微服务的,不会有驼回值
+    service-url: # 逗号隔开配置，多台服务器配置
+      defaultZone: http://127.0.0.1:8888/eureka
+    # 修改提供方获取注册地址间隔时间
+    registry-fetch-interval-seconds: 5
+  instance:
+    prefer-ip-address: true # 优先使用ip地址注删到eureka，在生产环境改为true
+      # 集群版
+
+#eureka:
+#  client:
+#    register-with-eureka: true # 是否需要注册到eureka
+#    fetch-registry: true #客户端是否需要从eureka获取信息
+#    service-url: # 逗号隔开配置，多台服务器配置
+#      defaultZone: http://127.0.0.1:8888/eureka,http://127.0.0.1:9999/eureka
+
+#修改Ribbon的负霜均衡算法拦截器LoadBalancrIntercept-IRule-RandomRule
+#microservice-user:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+#默认熔断是关闭，需要打开
+feign:
+  hystrix:
+    enabled: true
